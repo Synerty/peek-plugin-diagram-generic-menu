@@ -1,0 +1,5 @@
+genericDiagramMenuFilt = {"plugin": "peek_plugin_generic_diagram_menu"}
+genericDiagramMenuTuplePrefix = "peek_plugin_generic_diagram_menu."
+genericDiagramMenuObservableName = "peek_plugin_generic_diagram_menu"
+genericDiagramMenuActionProcessorName = "peek_plugin_generic_diagram_menu"
+genericDiagramMenuTupleOfflineServiceName = "peek_plugin_generic_diagram_menu"
