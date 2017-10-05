@@ -15,22 +15,45 @@
         </div>
     </div>
     <div class="panel-body">
+        <div class="alert alert-info" role="alert">
+            use {{'{'}}key{{'}'}} for the display key, or {{'{'}}valx{{'}'}} where
+            valx is a key in the data dict provided with the display item during
+            import.<br>
+            For example "alias", "name".
+        </div>
         <table class="table">
+            <thead>
             <tr>
-                <th>String 1</th>
-                <th>Int 1</th>
+                <th></th>
+                <th>Model Set Key (?)</th>
+                <th>Coord Set Key (?)</th>
+                <th>Font Awesome Icon (?)</th>
+                <th>Title</th>
                 <th></th>
             </tr>
-            <tr *ngFor="let item of items">
+            </thead>
+            <tbody *ngFor="let item of items">
+            <tr>
+                <td></td>
                 <td>
-                    <input [(ngModel)]="item.string1"
+                    <input [(ngModel)]="item.modelSetKey"
                            class="form-control input-sm"
                            type="text"/>
                 </td>
                 <td>
-                    <input [(ngModel)]="item.int1"
+                    <input [(ngModel)]="item.coordSetKey"
                            class="form-control input-sm"
-                           type="number"/>
+                           type="text"/>
+                </td>
+                <td>
+                    <input [(ngModel)]="item.faIcon"
+                           class="form-control input-sm"
+                           type="text"/>
+                </td>
+                <td>
+                    <input [(ngModel)]="item.title"
+                           class="form-control input-sm"
+                           type="text"/>
                 </td>
                 <td>
                     <div class="btn btn-default" (click)='removeRow(item)'>
@@ -38,6 +61,15 @@
                     </div>
                 </td>
             </tr>
+            <tr>
+                <th>URL</th>
+                <td style="width: 100%" colspan="5">
+                    <input [(ngModel)]="item.url"
+                           class="form-control input-sm"
+                           type="text"/>
+                </td>
+            </tr>
+            </tbody>
         </table>
     </div>
 </div>

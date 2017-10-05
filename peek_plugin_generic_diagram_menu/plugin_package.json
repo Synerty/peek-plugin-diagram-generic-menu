@@ -1,6 +1,6 @@
 {
     "plugin": {
-        "title": "GenericDiagramMenu Plugin",
+        "title": "Generic Diagram Menu",
         "packageName": "peek_plugin_generic_diagram_menu",
     "version":"0.0.1",
         "buildNumber": "#PLUGIN_BUILD#",
@@ -14,7 +14,7 @@
         "admin",
         "client",
         "mobile",
-        "agent"
+        "desktop"
     ],
     "server": {
     },
@@ -25,21 +25,36 @@
         "showHomeLink": true,
         "appDir": "_private/admin-app",
         "appModule": "genericDiagramMenu.module#GenericDiagramMenuModule",
-        "moduleDir": "plugin-module",
+        "moduleDir": "plugin-module"
     },
     "client": {
     },
     "mobile": {
-        "showHomeLink": true,
-        "appDir": "_private/mobile-app",
-        "appModule": "genericDiagramMenu.module#GenericDiagramMenuModule",
-        "assetDir": "_private/mobile-assets",
-        "icon": "/assets/peek_plugin_generic_diagram_menu/icon.png",
-        "moduleDir": "plugin-module"
-    },
-    "agent": {
+        "moduleDir": "plugin-module",
+        "rootServices": [
+            {
+                "file": "_private/services/PrivateGenericTupleService",
+                "class": "PrivateGenericTupleService"
+            },
+            {
+                "file": "_private/services/PrivateGenericMenuService",
+                "class": "PrivateGenericMenuService",
+                "persistent": true
+            }
+        ]
     },
     "desktop": {
-        "moduleDir": "plugin-module"
+        "moduleDir": "plugin-module",
+        "rootServices": [
+            {
+                "file": "_private/services/PrivateGenericTupleService",
+                "class": "PrivateGenericTupleService"
+            },
+            {
+                "file": "_private/services/PrivateGenericMenuService",
+                "class": "PrivateGenericMenuService",
+                "persistent": true
+            }
+        ]
     }
 }

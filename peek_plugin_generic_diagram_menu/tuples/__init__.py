@@ -7,5 +7,3 @@ def loadPublicTuples():
 
     """
 
-    from . import DoSomethingTuple
-    DoSomethingTuple.__unused = False

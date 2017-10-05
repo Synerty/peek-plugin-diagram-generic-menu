@@ -8,6 +8,7 @@ import {
 import {GenericDiagramMenuTuple,
     genericDiagramMenuFilt
 } from "@peek/peek_plugin_generic_diagram_menu/_private";
+import {Ng2BalloonMsgService} from "@synerty/ng2-balloon-msg";
 
 
 @Component({
@@ -25,16 +26,13 @@ export class EditGenericDiagramMenuComponent extends ComponentLifecycleEventEmit
 
     loader: TupleLoader;
 
-    constructor(vortexService: VortexService) {
+    constructor(vortexService: VortexService,
+                private balloonMsg:Ng2BalloonMsgService) {
         super();
 
-        this.loader = vortexService.createTupleLoader(this,
-            () => {
-                let filt = extend({}, this.filt, genericDiagramMenuFilt);
-                // If we wanted to filter the data we get, we could add this
-                // filt["lookupName"] = 'lookupType';
-                return filt;
-            });
+        this.loader = vortexService.createTupleLoader(
+            this, extend({}, this.filt, genericDiagramMenuFilt)
+        );
 
         this.loader.observable
             .subscribe((tuples:GenericDiagramMenuTuple[]) => {
@@ -68,7 +66,9 @@ export class EditGenericDiagramMenuComponent extends ComponentLifecycleEventEmit
                 if (itemsToDelete.length != 0) {
                     return this.loader.del(itemsToDelete);
                 }
-            });
+            })
+            .then(() => this.balloonMsg.showSuccess("Save Successful"))
+            .catch(e => this.balloonMsg.showError(e));
     }
 
 }

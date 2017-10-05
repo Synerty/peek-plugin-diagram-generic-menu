@@ -9,11 +9,11 @@ export class GenericDiagramMenuTuple extends Tuple {
     //  Description of date1
     id : number;
 
-    //  Description of string1
-    string1 : string;
-
-    //  Description of int1
-    int1 : number;
+    modelSetKey : string | null;
+    coordSetKey : string | null;
+    faIcon : string | null;
+    title : string;
+    url : string;
 
     constructor() {
         super(GenericDiagramMenuTuple.tupleName)

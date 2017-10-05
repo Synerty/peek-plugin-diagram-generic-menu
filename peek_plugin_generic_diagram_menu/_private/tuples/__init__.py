@@ -6,11 +6,3 @@ def loadPrivateTuples():
     serialised data.
 
     """
-    from . import GenericDiagramMenuTuple
-    GenericDiagramMenuTuple.__unused = False
-
-    from . import AddIntValueActionTuple
-    AddIntValueActionTuple.__unused = False
-
-    from . import StringCapToggleActionTuple
-    StringCapToggleActionTuple.__unused = False
