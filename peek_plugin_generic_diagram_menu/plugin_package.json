@@ -1,6 +1,6 @@
 {
     "plugin": {
-        "title": "Generic Diagram Menu",
+        "title": "Diagram Generic Menu",
         "packageName": "peek_plugin_generic_diagram_menu",
     "version":"0.7.6.3",
         "buildNumber": "#PLUGIN_BUILD#",
