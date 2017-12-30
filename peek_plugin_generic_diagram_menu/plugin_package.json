@@ -2,7 +2,7 @@
     "plugin": {
         "title": "Diagram Generic Menu",
         "packageName": "peek_plugin_generic_diagram_menu",
-    "version":"0.7.9.1",
+    "version":"0.7.9.2",
         "buildNumber": "#PLUGIN_BUILD#",
         "buildDate": "#BUILD_DATE#",
         "creator": "Synerty Pty Ltd",
