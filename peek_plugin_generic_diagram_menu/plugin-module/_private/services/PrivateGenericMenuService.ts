@@ -1,6 +1,6 @@
 import {Injectable, Optional} from "@angular/core";
 
-import {DiagramItemPopupService, DiagramItemPopupContextI} from "@peek/peek_plugin_diagram/DiagramItemPopupService";
+import {DiagramItemPopupService, DiagramItemPopupContextI} from "@peek/peek_plugin_diagram";
 import {PrivateGenericTupleService} from "./PrivateGenericTupleService";
 import {GenericDiagramMenuTuple} from "../tuples/GenericDiagramMenuTuple";
 import {ComponentLifecycleEventEmitter,
