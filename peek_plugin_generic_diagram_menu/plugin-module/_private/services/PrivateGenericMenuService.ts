@@ -1,10 +1,20 @@
 import {Injectable, Optional} from "@angular/core";
 
-import {DiagramItemPopupService, DiagramItemPopupContextI} from "@peek/peek_plugin_diagram";
+import {
+    DiagramItemPopupContextI,
+    DiagramItemPopupService
+} from "@peek/peek_plugin_diagram";
 import {PrivateGenericTupleService} from "./PrivateGenericTupleService";
 import {GenericDiagramMenuTuple} from "../tuples/GenericDiagramMenuTuple";
-import {ComponentLifecycleEventEmitter,
-TupleSelector} from "@synerty/vortexjs";
+import {ComponentLifecycleEventEmitter, extend, TupleSelector} from "@synerty/vortexjs";
+
+import {
+    DocDbDocumentTypeTuple,
+    DocDbPropertyTuple,
+    DocDbService,
+    DocumentResultI,
+    DocumentTuple
+} from "@peek/peek_plugin_docdb";
 
 /** DMS Diagram Item Popup Service
  *
@@ -16,15 +26,16 @@ TupleSelector} from "@synerty/vortexjs";
 @Injectable()
 export class PrivateGenericMenuService extends ComponentLifecycleEventEmitter {
 
-    private menus:GenericDiagramMenuTuple [] = [];
+    private menus: GenericDiagramMenuTuple [] = [];
 
-    constructor(@Optional() private diagramPopup:DiagramItemPopupService,
-                private tupleService:PrivateGenericTupleService) {
+    constructor(@Optional() private diagramPopup: DiagramItemPopupService,
+                private tupleService: PrivateGenericTupleService,
+                private docDbService: DocDbService) {
         super();
 
         this.tupleService.tupleDataOfflineObserver
             .subscribeToTupleSelector(new TupleSelector(GenericDiagramMenuTuple.tupleName, {}))
-            .subscribe((tuples:GenericDiagramMenuTuple[]) => this.menus = tuples);
+            .subscribe((tuples: GenericDiagramMenuTuple[]) => this.menus = tuples);
 
 
         if (this.diagramPopup != null) {
@@ -32,7 +43,7 @@ export class PrivateGenericMenuService extends ComponentLifecycleEventEmitter {
                 .itemPopupObservable()
                 .takeUntil(this.onDestroyEvent)
                 .subscribe((context: DiagramItemPopupContextI) => {
-                    this.addMenus(context);
+                    this.handlePopup(context);
                 });
 
         }
@@ -41,7 +52,26 @@ export class PrivateGenericMenuService extends ComponentLifecycleEventEmitter {
     }
 
 
-    private addMenus(context: DiagramItemPopupContextI) :void {
+    private handlePopup(context: DiagramItemPopupContextI): void {
+        if (context.key == null)
+            return;
+
+        this.docDbService.getObjects("pofDiagram", [context.key])
+            .then((docs: DocumentResultI) => {
+                console.log(docs);
+                let doc = docs[context.key];
+                let contextCopy = extend({}, context);
+                if (doc == null) {
+                    console.log(`Document ${context.key} can not be found.`);
+                } else {
+                    contextCopy.data = extend({}, doc.document, contextCopy.data);
+                }
+
+                this.addMenus(contextCopy);
+            });
+    }
+
+    private addMenus(context: DiagramItemPopupContextI): void {
         for (let menu of this.menus) {
             if (!(context.modelSetKey == menu.modelSetKey || menu.modelSetKey == null))
                 continue;
@@ -64,12 +94,12 @@ export class PrivateGenericMenuService extends ComponentLifecycleEventEmitter {
                 icon: menu.faIcon,
                 callback: () => this.menuClicked(menu, url),
                 children: [],
-                closeOnCallback:true
+                closeOnCallback: true
             });
         }
     }
 
-    private menuClicked(menu:GenericDiagramMenuTuple, url:string) : void  {
+    private menuClicked(menu: GenericDiagramMenuTuple, url: string): void {
         window.open(url);
     }
 
