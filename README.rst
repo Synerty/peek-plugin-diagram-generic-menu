@@ -1,5 +1,5 @@
 =================
-GenericDiagramMenu Plugin 1
+DiagramGenericMenu Plugin 1
 =================
 
-This is a Peek Plugin, from the genericDiagramMenu.
+This is a Peek Plugin, from the diagramGenericMenu.

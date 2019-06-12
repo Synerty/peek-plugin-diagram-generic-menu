@@ -5,7 +5,7 @@ set -o errexit
 
 #------------------------------------------------------------------------------
 # Configure package preferences here
-PY_PACKAGE="peek_plugin_generic_diagram_menu"
+PY_PACKAGE="peek_plugin_diagram_generic_menu"
 
 # Leave blank not to publish
 # Or select one of the index servers defined in ~/.pypirc
