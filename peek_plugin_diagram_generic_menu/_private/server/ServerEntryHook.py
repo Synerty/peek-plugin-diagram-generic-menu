@@ -58,7 +58,7 @@ class ServerEntryHook(PluginServerEntryHookABC, PluginServerStorageEntryHookABC)
                 IF EXISTS(
                     SELECT schema_name
                       FROM information_schema.schemata
-                      WHERE schema_name = 'pl_diagram_generic_menu'
+                      WHERE schema_name = 'pl_generic_diagram_menu'
                   )
                 THEN
                   EXECUTE ' DROP SCHEMA IF EXISTS pl_diagram_generic_menu CASCADE ';
