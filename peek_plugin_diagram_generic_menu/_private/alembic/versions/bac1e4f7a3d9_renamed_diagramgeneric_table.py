@@ -18,10 +18,10 @@ from alembic import op
 
 
 def upgrade():
-    op.rename_table("DiagramGenericMenu", "GenericDiagramMenu",
+    op.rename_table("GenericDiagramMenu", "DiagramGenericMenu",
                     schema='pl_diagram_generic_menu')
 
 
 def downgrade():
-    op.rename_table("GenericDiagramMenu", "DiagramGenericMenu",
+    op.rename_table("DiagramGenericMenu", "GenericDiagramMenu",
                     schema='pl_diagram_generic_menu')
