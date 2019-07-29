@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-PY_PACKAGE="peek_plugin_diagram_generic_menu"
+PY_PACKAGE="peek_plugin_object_generic_menu"
 PYPI_PUBLISH="1"
 
 GITHUB_PUSH="1"

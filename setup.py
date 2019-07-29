@@ -9,10 +9,10 @@ from setuptools import find_packages
 #
 author = "Synerty"
 author_email = 'contact@synerty.com'
-py_package_name = "peek_plugin_diagram_generic_menu"
+py_package_name = "peek_plugin_object_generic_menu"
 pip_package_name = py_package_name.replace('_', '-')
 package_version = '0.0.0'
-description = 'Peek Plugin DiagramGenericMenu - My first enhancement.'
+description = 'Peek Plugin ObjectGenericMenu - My first enhancement.'
 
 download_url = 'https://bitbucket.org/synerty/%s/get/%s.zip'
 download_url %= pip_package_name, package_version
