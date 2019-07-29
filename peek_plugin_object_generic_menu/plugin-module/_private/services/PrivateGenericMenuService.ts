@@ -1,10 +1,10 @@
 import {Injectable} from "@angular/core";
 
 import {
-    ObjectPopupContextI,
-    ObjectPopupService,
-    ObjectPopupTypeE
-} from "@peek/peek_plugin_object_popup";
+    DocDbPopupContextI,
+    DocDbPopupService,
+    DocDbPopupTypeE
+} from "@peek/peek_plugin_docdb";
 import {PrivateGenericTupleService} from "./PrivateGenericTupleService";
 import {ObjectGenericMenuTuple} from "../tuples/ObjectGenericMenuTuple";
 import {ComponentLifecycleEventEmitter, TupleSelector} from "@synerty/vortexjs";
@@ -21,7 +21,7 @@ export class PrivateGenericMenuService extends ComponentLifecycleEventEmitter {
 
     private menus: ObjectGenericMenuTuple [] = [];
 
-    constructor(private objectPopupService: ObjectPopupService,
+    constructor(private objectPopupService: DocDbPopupService,
                 private tupleService: PrivateGenericTupleService) {
         super();
 
@@ -30,19 +30,19 @@ export class PrivateGenericMenuService extends ComponentLifecycleEventEmitter {
             .subscribe((tuples: ObjectGenericMenuTuple[]) => this.menus = tuples);
 
         this.objectPopupService
-            .popupObservable(ObjectPopupTypeE.summaryPopup)
+            .popupObservable(DocDbPopupTypeE.summaryPopup)
             .takeUntil(this.onDestroyEvent)
-            .subscribe((c: ObjectPopupContextI) => this.handlePopup(c));
+            .subscribe((c: DocDbPopupContextI) => this.handlePopup(c));
 
         this.objectPopupService
-            .popupObservable(ObjectPopupTypeE.detailPopup)
+            .popupObservable(DocDbPopupTypeE.detailPopup)
             .takeUntil(this.onDestroyEvent)
-            .subscribe((c: ObjectPopupContextI) => this.handlePopup(c));
+            .subscribe((c: DocDbPopupContextI) => this.handlePopup(c));
 
     }
 
 
-    private handlePopup(context: ObjectPopupContextI): void {
+    private handlePopup(context: DocDbPopupContextI): void {
         if (context.key == null)
             return;
 
