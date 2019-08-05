@@ -54,7 +54,7 @@ export class PrivateGenericMenuService extends ComponentLifecycleEventEmitter {
                 continue;
 
             if (menu.url == null || menu.url.length == 0)
-                return;
+                continue;
 
             // Get the two values we need to work with
             let url = menu.url;
@@ -63,7 +63,7 @@ export class PrivateGenericMenuService extends ComponentLifecycleEventEmitter {
             if (condition.length != 0) {
                 if (condition.indexOf('==') == -1) {
                     console.log("ERROR: There is no == in menu condition, skipping menu");
-                    return;
+                    continue;
                 }
             }
 
@@ -79,12 +79,18 @@ export class PrivateGenericMenuService extends ComponentLifecycleEventEmitter {
                 key = key.toLowerCase();
                 url = url.replace(`{${key}}`, val);
                 condition = condition.replace(`{${key}}`, val);
+                delete paramList[key];
+            }
+
+            if (Object.keys(paramList).length != 0) {
+                // Not all parameters were filled, so don't show the menu
+                continue;
             }
 
             if (condition.length != 0) {
                 const parts = condition.toLowerCase().split('==');
                 if (parts[0].trim() != parts[1].trim())
-                    return;
+                    continue;
             }
 
             context.addAction({
