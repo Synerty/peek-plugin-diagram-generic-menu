@@ -12,5 +12,6 @@ item.
     :maxdepth: 3
     :caption: Contents:
 
+    menus/menus
     admin_tasks/admin_tasks
 

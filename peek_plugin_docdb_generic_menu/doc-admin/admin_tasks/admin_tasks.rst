@@ -19,8 +19,6 @@ The custom object menus can be edited via the admin UI.
 
 #.  Click save.
 
-.. image:: admin_task_edit_menus.png
-
 ----
 
 The URL can take multiple placeholders with the format :code:`{key}`,
@@ -32,6 +30,7 @@ the URL placeholders can come from:
 
 *   Properties from DocDB for a document with the same ModelSet and Document key
     matching the ModelSet and display item key with the selected display item.
+
 
 ----
 

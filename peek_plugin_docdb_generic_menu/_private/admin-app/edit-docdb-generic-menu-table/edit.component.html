@@ -25,9 +25,11 @@
             <thead>
             <tr>
                 <th></th>
-                <th>Model Set Key (?)</th>
-                <th>Font Awesome Icon (?)</th>
-                <th>Title</th>
+                <th>Model Set Key(?)</th>
+                <th><a href="https://fontawesome.com/icons?d=gallery&s=regular&m=free">Font Awesome Icon(?)</a></th>
+                <th>Title(?)</th>
+                <th>Tooltip(?)</th>
+                <th>Condition(?)</th>
                 <th></th>
             </tr>
             </thead>
@@ -50,6 +52,16 @@
                            type="text"/>
                 </td>
                 <td>
+                    <input [(ngModel)]="item.tooltip"
+                           class="form-control input-sm"
+                           type="text"/>
+                </td>
+                <td>
+                    <input [(ngModel)]="item.showCondition"
+                           class="form-control input-sm"
+                           type="text"/>
+                </td>
+                <td>
                     <div class="btn btn-default" (click)='removeRow(item)'>
                         <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                     </div>
@@ -57,7 +69,7 @@
             </tr>
             <tr>
                 <th>URL</th>
-                <td style="width: 100%" colspan="5">
+                <td style="width: 100%" colspan="7">
                     <input [(ngModel)]="item.url"
                            class="form-control input-sm"
                            type="text"/>

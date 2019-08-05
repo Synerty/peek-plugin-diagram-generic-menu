@@ -1,12 +1,13 @@
-import {Component, OnInit} from "@angular/core";
+import {Component} from "@angular/core";
 import {
-    extend,
-    VortexService,
     ComponentLifecycleEventEmitter,
-    TupleLoader
+    extend,
+    TupleLoader,
+    VortexService
 } from "@synerty/vortexjs";
-import {DocDbGenericMenuTuple,
-    docDbGenericMenuFilt
+import {
+    docDbGenericMenuFilt,
+    DocDbGenericMenuTuple
 } from "@peek/peek_plugin_docdb_generic_menu/_private";
 import {Ng2BalloonMsgService} from "@synerty/ng2-balloon-msg";
 
@@ -27,7 +28,7 @@ export class EditDocDbGenericMenuComponent extends ComponentLifecycleEventEmitte
     loader: TupleLoader;
 
     constructor(vortexService: VortexService,
-                private balloonMsg:Ng2BalloonMsgService) {
+                private balloonMsg: Ng2BalloonMsgService) {
         super();
 
         this.loader = vortexService.createTupleLoader(
@@ -35,7 +36,7 @@ export class EditDocDbGenericMenuComponent extends ComponentLifecycleEventEmitte
         );
 
         this.loader.observable
-            .subscribe((tuples:DocDbGenericMenuTuple[]) => {
+            .subscribe((tuples: DocDbGenericMenuTuple[]) => {
                 this.items = tuples;
                 this.itemsToDelete = [];
             });
@@ -59,6 +60,22 @@ export class EditDocDbGenericMenuComponent extends ComponentLifecycleEventEmitte
     }
 
     save() {
+        for (const item of this.items) {
+            if (item.showCondition != null && item.showCondition.length != 0) {
+                if (item.showCondition.indexOf('==') == -1) {
+                    this.balloonMsg.showWarning("Failed to save, all conditions that are" +
+                        " set must have '==' in them");
+                    return;
+                }
+            }
+
+            if (item.url == null || item.url.length == 0) {
+                this.balloonMsg.showWarning("Failed to save, all menus must have a url set");
+                return;
+            }
+        }
+
+
         let itemsToDelete = this.itemsToDelete;
 
         this.loader.save(this.items)

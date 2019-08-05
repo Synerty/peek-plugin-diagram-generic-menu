@@ -7,13 +7,15 @@ export class DocDbGenericMenuTuple extends Tuple {
     public static readonly tupleName = docDbGenericMenuTuplePrefix + "DocDbGenericMenuTuple";
 
     //  Description of date1
-    id : number;
+    id: number;
 
-    modelSetKey : string | null;
-    coordSetKey : string | null;
-    faIcon : string | null;
-    title : string;
-    url : string;
+    modelSetKey: string | null;
+    coordSetKey: string | null;
+    faIcon: string | null;
+    title: string;
+    tooltip: string;
+    url: string;
+    showCondition: string | null;
 
     constructor() {
         super(DocDbGenericMenuTuple.tupleName)
