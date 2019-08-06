@@ -21,7 +21,7 @@ export class PrivateGenericMenuService extends ComponentLifecycleEventEmitter {
 
     private menus: DocDbGenericMenuTuple [] = [];
 
-    private readonly PLACEHOLDER_REGEXP = /(?<![$])\{([A-Za-z0-9_.]+)\}/gi;
+    private readonly PLACEHOLDER_REGEXP = /\{([A-Za-z0-9_.]+)\}/gi;
 
     constructor(private objectPopupService: DocDbPopupService,
                 private tupleService: PrivateGenericTupleService) {
