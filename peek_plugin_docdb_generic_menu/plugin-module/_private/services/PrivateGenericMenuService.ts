@@ -47,7 +47,7 @@ export class PrivateGenericMenuService extends ComponentLifecycleEventEmitter {
         if (context.key == null)
             return;
 
-        const doc = context.document == null ? null : context.document.document;
+        const doc = (context.document == null ? null : context.document.document) || {};
 
         for (const menu of this.menus) {
             if (!(context.modelSetKey == menu.modelSetKey || menu.modelSetKey == null))
