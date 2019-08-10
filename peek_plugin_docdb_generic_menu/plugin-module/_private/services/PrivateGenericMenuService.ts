@@ -21,7 +21,7 @@ export class PrivateGenericMenuService extends ComponentLifecycleEventEmitter {
 
     private menus: DocDbGenericMenuTuple [] = [];
 
-    private readonly PLACEHOLDER_REGEXP = /\{([A-Za-z0-9_.]+)\}/gi;
+    private readonly PLACEHOLDER_REGEXP = /\{([A-Za-z0-9_. ]+)\}/gi;
 
     constructor(private objectPopupService: DocDbPopupService,
                 private tupleService: PrivateGenericTupleService) {
@@ -61,8 +61,8 @@ export class PrivateGenericMenuService extends ComponentLifecycleEventEmitter {
             let condition = menu.showCondition == null ? '' : menu.showCondition;
 
             if (condition.length != 0) {
-                if (condition.indexOf('==') == -1) {
-                    console.log("ERROR: There is no == in menu condition, skipping menu");
+                if (condition.indexOf('==') == -1 && condition.indexOf('!=') == -1) {
+                    console.log("ERROR: There is no == or != in menu condition, skipping menu");
                     continue;
                 }
             }
@@ -88,9 +88,17 @@ export class PrivateGenericMenuService extends ComponentLifecycleEventEmitter {
             }
 
             if (condition.length != 0) {
-                const parts = condition.toLowerCase().split('==');
-                if (parts[0].trim() != parts[1].trim())
-                    continue;
+                condition = condition.toLowerCase();
+                if (condition.indexOf('==') != -1) {
+                    const parts = condition.split('==');
+                    if (parts[0].trim() != (parts[1] == null ? '' : parts[1].trim()))
+                        continue;
+
+                } else if (condition.indexOf('!=') != -1) {
+                    const parts = condition.split('!=');
+                    if (parts[0].trim() == (parts[1] == null ? '' : parts[1].trim()))
+                        continue;
+                }
             }
 
             context.addAction({

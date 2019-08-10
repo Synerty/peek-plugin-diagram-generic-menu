@@ -62,9 +62,10 @@ export class EditDocDbGenericMenuComponent extends ComponentLifecycleEventEmitte
     save() {
         for (const item of this.items) {
             if (item.showCondition != null && item.showCondition.length != 0) {
-                if (item.showCondition.indexOf('==') == -1) {
+                if (item.showCondition.indexOf('==') == -1
+                    && item.showCondition.indexOf('!=') == -1) {
                     this.balloonMsg.showWarning("Failed to save, all conditions that are" +
-                        " set must have '==' in them");
+                        " set must have '==' or '!=' in them");
                     return;
                 }
             }
