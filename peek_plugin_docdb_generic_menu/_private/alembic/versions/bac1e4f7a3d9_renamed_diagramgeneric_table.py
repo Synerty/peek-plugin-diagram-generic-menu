@@ -18,8 +18,23 @@ from alembic import op
 
 
 def upgrade():
-    op.rename_table("GenericDiagramMenu", "DiagramGenericMenu",
-                    schema='pl_diagram_generic_menu')
+    renameToDocDbSql = '''
+            DO $$
+            BEGIN
+                IF EXISTS(
+                    SELECT table_schema
+                      FROM information_schema.tables
+                      WHERE table_schema = 'pl_docdb_generic_menu'
+                        AND table_name = 'GenericDiagramMenu'
+                  )
+                THEN
+                  EXECUTE ' ALTER TABLE pl_docdb_generic_menu."GenericDiagramMenu" 
+                            RENAME TO "Menu" ';
+                END IF;
+            END
+            $$;
+        '''
+    op.execute(renameToDocDbSql)
 
 
 def downgrade():
