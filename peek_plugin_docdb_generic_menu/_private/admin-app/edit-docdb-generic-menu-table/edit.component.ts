@@ -9,7 +9,7 @@ import {
     docDbGenericMenuFilt,
     DocDbGenericMenuTuple
 } from "@peek/peek_plugin_docdb_generic_menu/_private";
-import {Ng2BalloonMsgService} from "@synerty/ng2-balloon-msg";
+import { BalloonMsgService } from "@synerty/peek-plugin-base-js"
 
 
 @Component({
@@ -28,7 +28,7 @@ export class EditDocDbGenericMenuComponent extends ComponentLifecycleEventEmitte
     loader: TupleLoader;
 
     constructor(vortexService: VortexService,
-                private balloonMsg: Ng2BalloonMsgService) {
+                private balloonMsg: BalloonMsgService) {
         super();
 
         this.loader = vortexService.createTupleLoader(
