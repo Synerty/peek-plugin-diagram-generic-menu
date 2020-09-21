@@ -1,7 +1,7 @@
 import { Component } from "@angular/core"
 import { BalloonMsgService, NgLifeCycleEvents } from "@synerty/peek-plugin-base-js"
 import { extend, TupleLoader, VortexService } from "@synerty/vortexjs"
-import { docDbGenericMenuFilt, SettingPropertyTuple } from "@peek/peek_plugin_docdb_generic_menu/_private"
+import { docDbGenericMenuFilt, SettingPropertyTuple } from "@_peek/peek_plugin_docdb_generic_menu/_private"
 
 @Component({
     selector: "pl-docdb-generic-menu-edit-setting",
