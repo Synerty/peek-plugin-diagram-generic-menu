@@ -5,8 +5,8 @@ This section describes  the fields in the UI.
 
 :Model Set Key: The key of the model set to match, or null to match all
 
-:Font Awesome Icon: The name of a font awesome icon to show.
-    EG `https://fontawesome.com/icons?d=gallery&q=power`_
+:Ant Design Icon: The name of a ant design icon to show.
+    EG `https://ng.ant.design/components/icon/en`_
 
 :Title: The title to show on the menu button.
 
