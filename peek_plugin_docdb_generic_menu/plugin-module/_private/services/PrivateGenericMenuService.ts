@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core"
-import { DocDbPopupContextI, DocDbPopupService, DocDbPopupTypeE } from "@peek/peek_plugin_docdb"
+import { DocDbPopupContextI, DocDbPopupService, DocDbPopupTypeE } from "@peek/peek_core_docdb"
 import { PrivateGenericTupleService } from "./PrivateGenericTupleService"
 import { DocDbGenericMenuTuple } from "../tuples/DocDbGenericMenuTuple"
 import { TupleSelector } from "@synerty/vortexjs"
