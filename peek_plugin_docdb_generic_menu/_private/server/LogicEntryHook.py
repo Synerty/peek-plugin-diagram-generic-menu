@@ -3,14 +3,16 @@ import os
 
 from jsoncfg.value_mappers import require_string
 from peek_plugin_base.server.PluginLogicEntryHookABC import PluginLogicEntryHookABC
-from peek_plugin_base.server.PluginServerStorageEntryHookABC import \
-    PluginServerStorageEntryHookABC
+from peek_plugin_base.server.PluginServerStorageEntryHookABC import (
+    PluginServerStorageEntryHookABC,
+)
 from peek_plugin_base.storage.DbConnection import DbConnection
 from sqlalchemy import MetaData
 
 from peek_plugin_docdb_generic_menu._private.storage import DeclarativeBase
-from peek_plugin_docdb_generic_menu._private.storage.DeclarativeBase import \
-    loadStorageTuples
+from peek_plugin_docdb_generic_menu._private.storage.DeclarativeBase import (
+    loadStorageTuples,
+)
 from peek_plugin_docdb_generic_menu._private.tuples import loadPrivateTuples
 from peek_plugin_docdb_generic_menu.tuples import loadPublicTuples
 from .DocDbGenericMenuApi import DocDbGenericMenuApi
@@ -34,7 +36,7 @@ class LogicEntryHook(PluginLogicEntryHookABC, PluginServerStorageEntryHookABC):
         self._api = None
 
     def _migrateStorageSchema(self, metadata: MetaData) -> None:
-        """ Migrate Storage Schema
+        """Migrate Storage Schema
 
         Rename the schema
 
@@ -42,17 +44,18 @@ class LogicEntryHook(PluginLogicEntryHookABC, PluginServerStorageEntryHookABC):
 
         relDir = self._packageCfg.config.storage.alembicDir(require_string)
         alembicDir = os.path.join(self.rootDir, relDir)
-        if not os.path.isdir(alembicDir): raise NotADirectoryError(alembicDir)
+        if not os.path.isdir(alembicDir):
+            raise NotADirectoryError(alembicDir)
 
         dbConn = DbConnection(
             dbConnectString=self.platform.dbConnectString,
             metadata=metadata,
             alembicDir=alembicDir,
-            enableCreateAll=False
+            enableCreateAll=False,
         )
 
         # Rename the plugin schema to core.
-        renameSql = '''
+        renameSql = """
             DO $$
             BEGIN
                 IF EXISTS(
@@ -66,10 +69,10 @@ class LogicEntryHook(PluginLogicEntryHookABC, PluginServerStorageEntryHookABC):
                 END IF;
             END
             $$;
-        '''
+        """
 
         # Rename the plugin schema to core.
-        renameToObjectSql = '''
+        renameToObjectSql = """
             DO $$
             BEGIN
                 IF EXISTS(
@@ -83,10 +86,10 @@ class LogicEntryHook(PluginLogicEntryHookABC, PluginServerStorageEntryHookABC):
                 END IF;
             END
             $$;
-        '''
+        """
 
         # Rename the plugin schema to core.
-        renameToDocDbSql = '''
+        renameToDocDbSql = """
             DO $$
             BEGIN
                 IF EXISTS(
@@ -100,7 +103,7 @@ class LogicEntryHook(PluginLogicEntryHookABC, PluginServerStorageEntryHookABC):
                 END IF;
             END
             $$;
-        '''
+        """
 
         dbSession = dbConn.ormSessionCreator()
         try:
@@ -116,7 +119,7 @@ class LogicEntryHook(PluginLogicEntryHookABC, PluginServerStorageEntryHookABC):
         PluginServerStorageEntryHookABC._migrateStorageSchema(self, metadata)
 
     def load(self) -> None:
-        """ Load
+        """Load
 
         This will be called when the plugin is loaded, just after the db is migrated.
         Place any custom initialiastion steps here.
@@ -132,7 +135,7 @@ class LogicEntryHook(PluginLogicEntryHookABC, PluginServerStorageEntryHookABC):
         return DeclarativeBase.metadata
 
     def start(self):
-        """ Start
+        """Start
 
         This will be called when the plugin is loaded, just after the db is migrated.
         Place any custom initialiastion steps here.
@@ -142,13 +145,14 @@ class LogicEntryHook(PluginLogicEntryHookABC, PluginServerStorageEntryHookABC):
         tupleObservable = makeTupleDataObservableHandler(self.dbSessionCreator)
 
         self._loadedObjects.extend(
-            makeAdminBackendHandlers(tupleObservable, self.dbSessionCreator))
+            makeAdminBackendHandlers(tupleObservable, self.dbSessionCreator)
+        )
 
         self._loadedObjects.append(tupleObservable)
 
         mainController = MainController(
-            dbSessionCreator=self.dbSessionCreator,
-            tupleObservable=tupleObservable)
+            dbSessionCreator=self.dbSessionCreator, tupleObservable=tupleObservable
+        )
 
         self._loadedObjects.append(mainController)
         self._loadedObjects.append(makeTupleActionProcessorHandler(mainController))
@@ -160,7 +164,7 @@ class LogicEntryHook(PluginLogicEntryHookABC, PluginServerStorageEntryHookABC):
         logger.debug("Started")
 
     def stop(self):
-        """ Stop
+        """Stop
 
         This method is called by the platform to tell the peek app to shutdown and stop
         everything it's doing
@@ -184,8 +188,8 @@ class LogicEntryHook(PluginLogicEntryHookABC, PluginServerStorageEntryHookABC):
 
     @property
     def publishedServerApi(self) -> object:
-        """ Published Server API
-    
+        """Published Server API
+
         :return  class that implements the API that can be used by other Plugins on this
         platform service.
         """

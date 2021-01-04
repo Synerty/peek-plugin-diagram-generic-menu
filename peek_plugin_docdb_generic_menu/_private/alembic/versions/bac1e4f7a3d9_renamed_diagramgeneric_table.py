@@ -9,8 +9,8 @@ Create Date: 2019-06-13 17:05:23.123698
 """
 
 # revision identifiers, used by Alembic.
-revision = 'bac1e4f7a3d9'
-down_revision = '1f288982a4e2'
+revision = "bac1e4f7a3d9"
+down_revision = "1f288982a4e2"
 branch_labels = None
 depends_on = None
 
@@ -18,7 +18,7 @@ from alembic import op
 
 
 def upgrade():
-    renameToDocDbSql = '''
+    renameToDocDbSql = """
             DO $$
             BEGIN
                 IF EXISTS(
@@ -33,10 +33,11 @@ def upgrade():
                 END IF;
             END
             $$;
-        '''
+        """
     op.execute(renameToDocDbSql)
 
 
 def downgrade():
-    op.rename_table("DiagramGenericMenu", "GenericDiagramMenu",
-                    schema='pl_diagram_generic_menu')
+    op.rename_table(
+        "DiagramGenericMenu", "GenericDiagramMenu", schema="pl_diagram_generic_menu"
+    )

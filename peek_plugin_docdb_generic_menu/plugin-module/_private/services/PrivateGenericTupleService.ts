@@ -1,4 +1,4 @@
-import {Injectable, NgZone} from "@angular/core";
+import { Injectable, NgZone } from "@angular/core"
 import {
     TupleActionPushNameService,
     TupleActionPushOfflineService,
@@ -10,55 +10,52 @@ import {
     TupleStorageFactoryService,
     VortexService,
     VortexStatusService
-} from "@synerty/vortexjs";
+} from "@synerty/vortexjs"
 
 import {
     docDbGenericMenuActionProcessorName,
     docDbGenericMenuFilt,
     docDbGenericMenuObservableName,
     docDbGenericMenuTupleOfflineServiceName
-} from "../PluginNames";
-
+} from "../PluginNames"
 
 @Injectable()
-export class PrivateGenericTupleService  {
-
-    public tupleOfflineAction: TupleActionPushOfflineService;
-    public tupleDataOfflineObserver: TupleDataOfflineObserverService;
-
-
-    constructor(tupleActionSingletonService: TupleActionPushOfflineSingletonService,
-                vortexService: VortexService,
-                vortexStatusService: VortexStatusService,
-                storageFactory: TupleStorageFactoryService) {
-
-
+export class PrivateGenericTupleService {
+    
+    public tupleOfflineAction: TupleActionPushOfflineService
+    public tupleDataOfflineObserver: TupleDataOfflineObserverService
+    
+    constructor(
+        tupleActionSingletonService: TupleActionPushOfflineSingletonService,
+        vortexService: VortexService,
+        vortexStatusService: VortexStatusService,
+        storageFactory: TupleStorageFactoryService
+    ) {
+        
         let tupleDataObservableName = new TupleDataObservableNameService(
-            docDbGenericMenuObservableName, docDbGenericMenuFilt);
-
+            docDbGenericMenuObservableName, docDbGenericMenuFilt)
+        
         let storageName = new TupleOfflineStorageNameService(
-            docDbGenericMenuTupleOfflineServiceName);
-
+            docDbGenericMenuTupleOfflineServiceName)
+        
         let tupleActionName = new TupleActionPushNameService(
-            docDbGenericMenuActionProcessorName, docDbGenericMenuFilt);
-
+            docDbGenericMenuActionProcessorName, docDbGenericMenuFilt)
+        
         let tupleOfflineStorageService = new TupleOfflineStorageService(
-            storageFactory, storageName);
-
+            storageFactory, storageName)
+        
         this.tupleDataOfflineObserver = new TupleDataOfflineObserverService(
             vortexService,
             vortexStatusService,
             tupleDataObservableName,
-            tupleOfflineStorageService);
-
-
+            tupleOfflineStorageService)
+        
         this.tupleOfflineAction = new TupleActionPushOfflineService(
             tupleActionName,
             vortexService,
             vortexStatusService,
-            tupleActionSingletonService);
-
+            tupleActionSingletonService)
+        
     }
-
-
+    
 }

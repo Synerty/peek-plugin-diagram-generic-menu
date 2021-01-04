@@ -7,8 +7,7 @@ DeclarativeBase = declarative_base(metadata=metadata)
 
 
 def loadStorageTuples():
-
-    """ Load Storage Tables
+    """Load Storage Tables
 
     This method should be called from the "load()" method of the agent, server, worker
     and client entry hook classes.
@@ -18,7 +17,9 @@ def loadStorageTuples():
 
     """
     from . import DocDbGenericMenuTuple
+
     DocDbGenericMenuTuple.__unused = False
 
     from . import Setting
+
     Setting.__unused = False

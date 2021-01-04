@@ -1,7 +1,9 @@
-from peek_plugin_docdb_generic_menu._private.server.controller.MainController import \
-    MainController
-from peek_plugin_docdb_generic_menu.server.DocDbGenericMenuApiABC import \
-    DocDbGenericMenuApiABC
+from peek_plugin_docdb_generic_menu._private.server.controller.MainController import (
+    MainController,
+)
+from peek_plugin_docdb_generic_menu.server.DocDbGenericMenuApiABC import (
+    DocDbGenericMenuApiABC,
+)
 
 
 class DocDbGenericMenuApi(DocDbGenericMenuApiABC):
@@ -21,7 +23,6 @@ class DocDbGenericMenuApi(DocDbGenericMenuApiABC):
     #     # EG self._mainController.somethingCalled(somethingsDescription)
     #
     #     return DoSomethingTuplemethingTuple(result="SUCCESS : " + somethingsDescription)
-
 
     def shutdown(self):
         pass
