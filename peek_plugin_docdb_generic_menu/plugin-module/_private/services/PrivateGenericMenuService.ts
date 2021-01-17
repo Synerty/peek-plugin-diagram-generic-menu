@@ -6,8 +6,7 @@ import {
 } from "@peek/peek_core_docdb"
 import { PrivateGenericTupleService } from "./PrivateGenericTupleService"
 import { DocDbGenericMenuTuple } from "../tuples/DocDbGenericMenuTuple"
-import { TupleSelector } from "@synerty/vortexjs"
-import { NgLifeCycleEvents } from "@synerty/peek-plugin-base-js"
+import { NgLifeCycleEvents, TupleSelector } from "@synerty/vortexjs"
 
 /** DMS Object Item Popup Service
  *

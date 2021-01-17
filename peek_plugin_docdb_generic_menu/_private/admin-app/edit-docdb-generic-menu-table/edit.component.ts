@@ -1,13 +1,15 @@
 import { Component } from "@angular/core"
-import { extend, TupleLoader, VortexService } from "@synerty/vortexjs"
+import {
+    extend,
+    NgLifeCycleEvents,
+    TupleLoader,
+    VortexService
+} from "@synerty/vortexjs"
 import {
     docDbGenericMenuFilt,
     DocDbGenericMenuTuple
 } from "@peek/peek_plugin_docdb_generic_menu/_private"
-import {
-    BalloonMsgService,
-    NgLifeCycleEvents
-} from "@synerty/peek-plugin-base-js"
+import { BalloonMsgService } from "@synerty/peek-plugin-base-js"
 
 @Component({
     selector: "pl-docdb-generic-menu-edit-docdb-generic-menu",
