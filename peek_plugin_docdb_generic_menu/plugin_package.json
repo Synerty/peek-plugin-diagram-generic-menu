@@ -16,8 +16,7 @@
         "office",
         "admin-doc"
     ],
-    "logic": {
-    },
+    "logic": {},
     "admin-doc": {
         "docDir": "admin-doc",
         "docRst": "index.rst"
