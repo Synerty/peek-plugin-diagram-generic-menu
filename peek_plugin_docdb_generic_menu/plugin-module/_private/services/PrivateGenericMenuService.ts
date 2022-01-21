@@ -1,3 +1,4 @@
+import { takeUntil } from "rxjs/operators";
 import { Injectable } from "@angular/core";
 import {
     DocDbPopupContextI,
@@ -36,12 +37,12 @@ export class PrivateGenericMenuService extends NgLifeCycleEvents {
 
         this.objectPopupService
             .popupObservable(DocDbPopupTypeE.summaryPopup)
-            .takeUntil(this.onDestroyEvent)
+            .pipe(takeUntil(this.onDestroyEvent))
             .subscribe((c: DocDbPopupContextI) => this.handlePopup(c));
 
         this.objectPopupService
             .popupObservable(DocDbPopupTypeE.detailPopup)
-            .takeUntil(this.onDestroyEvent)
+            .pipe(takeUntil(this.onDestroyEvent))
             .subscribe((c: DocDbPopupContextI) => this.handlePopup(c));
     }
 
