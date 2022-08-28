@@ -6,7 +6,7 @@ This section describes  the fields in the UI.
 :Model Set Key: The key of the model set to match, or null to match all
 
 :Ant Design Icon: The name of a ant design icon to show.
-    EG `https://ng.ant.design/components/icon/en`_
+    EG `https://ng.ant.design/components/icon/en`
 
 :Title: The title to show on the menu button.
 
@@ -19,4 +19,3 @@ This section describes  the fields in the UI.
 :URL: The URL to navigate to. This can contain properties from the DocDB,
     EG :code:`http://place/{prop}`
 
-----
