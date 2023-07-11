@@ -1,6 +1,5 @@
 import { Component } from "@angular/core";
 import {
-    extend,
     NgLifeCycleEvents,
     TupleLoader,
     VortexService,
@@ -32,7 +31,7 @@ export class EditDocDbGenericMenuComponent extends NgLifeCycleEvents {
 
         this.loader = vortexService.createTupleLoader(
             this,
-            extend({}, this.filt, docDbGenericMenuFilt)
+            Object.assign({}, this.filt, docDbGenericMenuFilt)
         );
 
         this.loader.observable.subscribe((tuples: DocDbGenericMenuTuple[]) => {
