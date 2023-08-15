@@ -7,7 +7,7 @@ from peek_plugin_base.server.PluginServerStorageEntryHookABC import (
     PluginServerStorageEntryHookABC,
 )
 from peek_plugin_base.storage.DbConnection import DbConnection
-from sqlalchemy import MetaData
+from sqlalchemy import MetaData, text
 
 from peek_plugin_docdb_generic_menu._private.storage import DeclarativeBase
 from peek_plugin_docdb_generic_menu._private.storage.DeclarativeBase import (
@@ -55,7 +55,7 @@ class LogicEntryHook(PluginLogicEntryHookABC, PluginServerStorageEntryHookABC):
         )
 
         # Rename the plugin schema to core.
-        renameSql = """
+        renameSql = text("""
             DO $$
             BEGIN
                 IF EXISTS(
@@ -69,10 +69,10 @@ class LogicEntryHook(PluginLogicEntryHookABC, PluginServerStorageEntryHookABC):
                 END IF;
             END
             $$;
-        """
+        """)
 
         # Rename the plugin schema to core.
-        renameToObjectSql = """
+        renameToObjectSql = text("""
             DO $$
             BEGIN
                 IF EXISTS(
@@ -86,10 +86,10 @@ class LogicEntryHook(PluginLogicEntryHookABC, PluginServerStorageEntryHookABC):
                 END IF;
             END
             $$;
-        """
+        """)
 
         # Rename the plugin schema to core.
-        renameToDocDbSql = """
+        renameToDocDbSql = text("""
             DO $$
             BEGIN
                 IF EXISTS(
@@ -103,7 +103,7 @@ class LogicEntryHook(PluginLogicEntryHookABC, PluginServerStorageEntryHookABC):
                 END IF;
             END
             $$;
-        """
+        """)
 
         dbSession = dbConn.ormSessionCreator()
         try:
