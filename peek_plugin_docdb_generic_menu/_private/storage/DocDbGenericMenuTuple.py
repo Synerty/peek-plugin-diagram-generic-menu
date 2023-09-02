@@ -11,7 +11,7 @@ from peek_plugin_docdb_generic_menu._private.storage.DeclarativeBase import (
 
 
 @addTupleType
-class DocDbGenericMenuTuple(Tuple, DeclarativeBase):
+class DocDbGenericMenuTuple(DeclarativeBase, Tuple):
     __tupleType__ = docDbGenericMenuTuplePrefix + "DocDbGenericMenuTuple"
     __tablename__ = "Menu"
 

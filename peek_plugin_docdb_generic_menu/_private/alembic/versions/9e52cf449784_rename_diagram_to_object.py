@@ -15,10 +15,12 @@ branch_labels = None
 depends_on = None
 
 from alembic import op
+from sqlalchemy import text
 
 
 def upgrade():
-    renameToDocDbSql = """
+    renameToDocDbSql = text(
+        """
             DO $$
             BEGIN
                 IF EXISTS(
@@ -34,8 +36,11 @@ def upgrade():
             END
             $$;
         """
+    )
     op.execute(renameToDocDbSql)
 
 
 def downgrade():
-    op.rename_table("Menu", "DiagramGenericMenu", schema="pl_docdb_generic_menu")
+    op.rename_table(
+        "Menu", "DiagramGenericMenu", schema="pl_docdb_generic_menu"
+    )
